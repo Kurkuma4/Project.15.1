@@ -4,7 +4,6 @@ namespace Project.GameServices
 {
     public class ArmorGenerator : BaseGenerator<Armor>
     {
-
         public ArmorGenerator()
         {
             this.names.AddRange([
