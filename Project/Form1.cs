@@ -6,6 +6,9 @@ namespace Project
     {
         Player player = new Player();
         Random rnd = new Random();
+
+        private List<string> events;
+
         public Form1()
         {
             InitializeComponent();
@@ -17,6 +20,21 @@ namespace Project
             player.Agility = 5;
             player.Intelligence = 5;
             player.Gold = 100;
+
+            events = new List<string>
+            {
+                "Ви знайшли мішочок з грошима! +30 золота",
+                "Боржник повернув вам золото! +40 золота",
+                "Ви знайшли сховок з золотом! +50 золота",
+                "Ви зустріли доброго гнома! +15 золота",
+                "Ви знайшли чарівне дерево на якому росте золото! +25 золота",
+                "Під корчем поваленого дуба скриня з золотом , +70 золота",
+                "Переходячи в брод лісову річечку, ви знайшли декілька золотих самородків! +45 золота",
+
+                "Ви загубили мішочок з золотом :( -20 золота",
+                "Ви натрапили на відьму ( потрібно відкупитися ) -30 золота",
+                "Ви повинні кредитору золото :( -200 золота"
+            };
 
             UpdateUI();
         }
@@ -30,8 +48,20 @@ namespace Project
             }
             else if (random <= 60)
             {
-                player.Gold += 10;
-                AddLog("Подія! +10 золота", Color.Blue);
+                string eventText = events[rnd.Next(events.Count)];
+
+                AddLog(eventText, Color.Blue);
+
+                if (eventText.Contains("+15")) player.Gold += 15;
+                else if (eventText.Contains("+25")) player.Gold += 25;
+                else if (eventText.Contains("+30")) player.Gold += 30;
+                else if (eventText.Contains("+40")) player.Gold += 40;
+                else if (eventText.Contains("+45")) player.Gold += 45;
+                else if (eventText.Contains("+50")) player.Gold += 50;
+                else if (eventText.Contains("+70")) player.Gold += 70;
+                else if (eventText.Contains("-200")) player.Gold -= 200;
+                else if (eventText.Contains("-20")) player.Gold -= 20;
+                else if (eventText.Contains("-30")) player.Gold -= 30;
             }
             else if (random <= 90)
             {
@@ -40,6 +70,11 @@ namespace Project
             else
             {
                 AddLog("Знайдено магазин!", Color.Green);
+
+                Form2 shop = new Form2(player);
+                shop.ShowDialog();
+
+                UpdateUI();
             }
 
             UpdateUI();
@@ -60,6 +95,8 @@ namespace Project
             lblHealthValue.Text = player.MaxHealth.ToString();
             lblManaValue.Text = player.MaxMana.ToString();
             lblGoldValue.Text = player.Gold.ToString();
+            lblArmorValue.Text = player.Armor == null ? "Немає" : player.Armor.ToString();
+            lblWeaponValue.Text = player.Weapon == null ? "Немає" : player.Weapon.ToString();
         }
     }
 }

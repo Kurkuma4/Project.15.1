@@ -9,5 +9,11 @@ namespace Project.Entities
         public string Name;
         public int Price;
         public int DefenseBonus;
+
+        public override string ToString()
+        {
+            return $"{Name} | Захист +{DefenseBonus} | {Price} золота";
+        }
     }
+
 }
