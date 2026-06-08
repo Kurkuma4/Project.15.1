@@ -2,46 +2,34 @@
 
 namespace Project.GameServices
 {
-    public class WeaponGenerator
+    public class WeaponGenerator : BaseGenerator<Weapon>
     {
-        Random rnd = new Random();
-
-        private string[] names =
+        public WeaponGenerator()
         {
-            "Меч",
-            "Сокира",
-            "Кинджал",
-            "Булава",
-            "Молот",
-            "Спис",
-            "Катана",
-            "Лісовий ніж",
-            "Палка",
-            "Шабля"
-        };
+            this.names.AddRange([
+                "Меч",
+                "Сокира",
+                "Кинджал",
+                "Булава",
+                "Молот",
+                "Спис",
+                "Катана",
+                "Лісовий ніж",
+                "Палка",
+                "Шабля"
+            ]);
+        }
 
-        public Weapon CreateOne()
+        public override Weapon CreateOne()
         {
             int attack = rnd.Next(1, 11);
 
             return new Weapon
             {
-                Name = names[rnd.Next(names.Length)],
+                Name = names[rnd.Next(names.Count)],
                 AttackBonus = attack,
                 Price = attack * 20
             };
-        }
-
-        public List<Weapon> CreateMany(int count)
-        {
-            List<Weapon> weapons = new List<Weapon>();
-
-            for (int i = 0; i < count; i++)
-            {
-                weapons.Add(CreateOne());
-            }
-
-            return weapons;
         }
     }
 }
