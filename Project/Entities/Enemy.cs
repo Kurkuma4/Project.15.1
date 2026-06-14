@@ -18,5 +18,26 @@ namespace Project.Entities
 
         public int RewardGold;
         public int RewardXP;
+
+        public void TakeDamage(int damage)
+        {
+            damage -= Defense / 2;
+
+            if (damage < 1)
+                damage = 1;
+
+            Health -= damage;
+
+            if (Health < 0)
+                Health = 0;
+        }
+
+        public void Heal(int value)
+        {
+            Health += value;
+
+            if (Health > MaxHealth)
+                Health = MaxHealth;
+        }
     }
 }

@@ -19,6 +19,8 @@ namespace Project
             this.player = player;
 
             GenerateShop();
+
+            UpdateUI();
         }
 
         private void GenerateShop()
@@ -86,10 +88,28 @@ namespace Project
                     MessageBox.Show("Недостатньо золота!");
                 }
             }
+            UpdateUI();
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        private void UpdateUI()
+        {
+            lblGold.Text = $"Gold: {player.Gold}";
+
+            lblArmor.Text = player.Armor == null
+                ? "Armor: None"
+                : $"Armor: {player.Armor.Name} (+{player.Armor.DefenseBonus})";
+
+            lblWeapon.Text = player.Weapon == null
+                ? "Weapon: None"
+                : $"Weapon: {player.Weapon.Name} (+{player.Weapon.AttackBonus})";
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

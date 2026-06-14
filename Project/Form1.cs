@@ -21,6 +21,11 @@ namespace Project
             player.Intelligence = 5;
             player.Gold = 100;
 
+            player.ResetStats();
+
+            player.Health = player.MaxHealth;
+            player.Mana = player.MaxMana;
+
             events = new List<string>
             {
                 "Ви знайшли мішочок з грошима! +30 золота",
@@ -66,6 +71,20 @@ namespace Project
             else if (random <= 90)
             {
                 AddLog("Зустрів ворога!", Color.Red);
+
+                BattleForm battle = new BattleForm(player);
+                battle.ShowDialog();
+
+                if (battle.PlayerWon)
+                {
+                    AddLog("Перемога в бою! Ви отримали нагороду!", Color.Green);
+                }
+                else if (battle.PlayerLost)
+                {
+                    AddLog("Поразка в бою...", Color.Red);
+                }
+
+                UpdateUI();
             }
             else
             {

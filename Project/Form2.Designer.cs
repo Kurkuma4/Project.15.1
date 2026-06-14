@@ -33,13 +33,16 @@
             listBoxItems = new ListBox();
             lblShopType = new Label();
             btnClose = new Button();
+            lblArmor = new Label();
+            lblGold = new Label();
+            lblWeapon = new Label();
             SuspendLayout();
             // 
             // btnBuy
             // 
             btnBuy.BackColor = Color.FromArgb(255, 224, 192);
             btnBuy.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            btnBuy.Location = new Point(378, 591);
+            btnBuy.Location = new Point(193, 581);
             btnBuy.Name = "btnBuy";
             btnBuy.Size = new Size(257, 82);
             btnBuy.TabIndex = 0;
@@ -52,7 +55,7 @@
             listBoxItems.BackColor = Color.FromArgb(255, 224, 192);
             listBoxItems.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             listBoxItems.FormattingEnabled = true;
-            listBoxItems.Location = new Point(533, 236);
+            listBoxItems.Location = new Point(320, 221);
             listBoxItems.Name = "listBoxItems";
             listBoxItems.Size = new Size(488, 337);
             listBoxItems.TabIndex = 1;
@@ -62,7 +65,7 @@
             lblShopType.AutoSize = true;
             lblShopType.BackColor = Color.FromArgb(255, 224, 192);
             lblShopType.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            lblShopType.Location = new Point(649, 132);
+            lblShopType.Location = new Point(407, 133);
             lblShopType.Name = "lblShopType";
             lblShopType.Size = new Size(120, 50);
             lblShopType.TabIndex = 2;
@@ -72,7 +75,7 @@
             // 
             btnClose.BackColor = Color.FromArgb(255, 224, 192);
             btnClose.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            btnClose.Location = new Point(934, 591);
+            btnClose.Location = new Point(677, 581);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(257, 82);
             btnClose.TabIndex = 3;
@@ -80,18 +83,55 @@
             btnClose.UseVisualStyleBackColor = false;
             btnClose.Click += btnExit_Click;
             // 
+            // lblArmor
+            // 
+            lblArmor.AutoSize = true;
+            lblArmor.BackColor = Color.FromArgb(255, 224, 192);
+            lblArmor.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            lblArmor.Location = new Point(875, 257);
+            lblArmor.Name = "lblArmor";
+            lblArmor.Size = new Size(120, 50);
+            lblArmor.TabIndex = 4;
+            lblArmor.Text = "label1";
+            // 
+            // lblGold
+            // 
+            lblGold.AutoSize = true;
+            lblGold.BackColor = Color.FromArgb(255, 224, 192);
+            lblGold.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            lblGold.Location = new Point(875, 178);
+            lblGold.Name = "lblGold";
+            lblGold.Size = new Size(120, 50);
+            lblGold.TabIndex = 5;
+            lblGold.Text = "label1";
+            // 
+            // lblWeapon
+            // 
+            lblWeapon.AutoSize = true;
+            lblWeapon.BackColor = Color.FromArgb(255, 224, 192);
+            lblWeapon.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            lblWeapon.Location = new Point(875, 341);
+            lblWeapon.Name = "lblWeapon";
+            lblWeapon.Size = new Size(120, 50);
+            lblWeapon.TabIndex = 6;
+            lblWeapon.Text = "label3";
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(1554, 751);
+            Controls.Add(lblWeapon);
+            Controls.Add(lblGold);
+            Controls.Add(lblArmor);
             Controls.Add(btnClose);
             Controls.Add(lblShopType);
             Controls.Add(listBoxItems);
             Controls.Add(btnBuy);
             Name = "Form2";
             Text = "ShopForm";
+            Load += Form2_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -102,5 +142,8 @@
         private ListBox listBoxItems;
         private Label lblShopType;
         private Button btnClose;
+        private Label lblArmor;
+        private Label lblGold;
+        private Label lblWeapon;
     }
 }
