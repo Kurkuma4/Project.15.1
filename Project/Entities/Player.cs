@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Entities.Skills;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,25 +7,38 @@ namespace Project.Entities
 {
     public class Player
     {
-        public string Name;
+        public string Name = "";
 
-        public int Level;
-        public int Experience;
+        public int Level = 0;
+        public int Experience = 0;
 
-        public int Strength;
-        public int Endurance;
-        public int Agility;
-        public int Intelligence;
-        public int Mana;
+        public int Strength = 0;
+        public int Endurance = 0;
+        public int Agility = 0;
+        public int Intelligence = 0;
+        public int Mana = 0;
 
-        public int Gold;
+        public int Gold = 0;
 
-        public Weapon Weapon;
-        public Armor Armor;
+        public Weapon Weapon = null;
+        public Armor Armor = null;
         public int MaxHealth => Endurance * 10;
-        public int Health;
+        public int Health = 0;
 
         public int MaxMana => Intelligence * 5;
+
+        public List<BaseSkill> skills;
+
+        public Player()
+        {
+            skills = new List<BaseSkill>();
+
+            skills.Add(new Strike(this));
+            skills.Add(new PowerStrike(this));
+            skills.Add(new Heal(this));
+            skills.Add(new Rest(this));
+        }
+
         public void ResetStats()
         {
             Health = MaxHealth;

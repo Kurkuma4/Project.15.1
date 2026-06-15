@@ -1,5 +1,8 @@
 ﻿using Project.Entities;
+using Project.Entities.Skills;
 using Project.GameServices;
+using System.Runtime.InteropServices.Marshalling;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Project
 {
@@ -12,10 +15,6 @@ namespace Project
 
         private Random rnd = new Random();
 
-        private bool isPlayerTurn = true;
-
-        public bool PlayerWon = false;
-        public bool PlayerLost = false;
         public BattleForm(Player player)
         {
             InitializeComponent();
@@ -38,120 +37,54 @@ namespace Project
             richTextBoxLog.SelectionStart = richTextBoxLog.Text.Length;
             richTextBoxLog.ScrollToCaret();
         }
-        private void btnAttack_Click(object sender, EventArgs e)
+
+        private void usePlayerSkill(int skillIndex)
         {
-            if (!isPlayerTurn)
-            {
-                AddLog("Гравець переможений!", Color.Red);
-                PlayerLost = true;
-                this.Close();
-                return;
-            }
+            ResultUseSkill result = player.skills[skillIndex].use(enemy);
 
-
-            int damage = player.CalculateAttackPower();
-            enemy.TakeDamage(damage);
-
-            AddLog($"{player.Name} атакує і наносить {damage} шкоди!", Color.Blue);
-
-            UpdateUI();
-
-            isPlayerTurn = false;
-
-            EnemyTurn();
-        }
-        private void btnStrongAttack_Click(object sender, EventArgs e)
-        {
-            if (!isPlayerTurn)
-                return;
-
-            int manaCost = 15;
-
-            if (player.Mana < manaCost)
+            if (!result.IsSuccess)
             {
                 AddLog("Недостатньо мани!", Color.Orange);
                 return;
             }
 
-            int damage = player.CalculateAttackPower() * 2;
-
-            enemy.TakeDamage(damage);
-            player.Mana -= manaCost;
-
-            AddLog($"{player.Name} використовує СИЛЬНУ АТАКУ і наносить {damage} шкоди!", Color.DarkRed);
+            AddLog(result.Desc, result.Color);
 
             UpdateUI();
 
             if (enemy.Health <= 0)
             {
                 AddLog($"Ворог {enemy.Name} переможений!", Color.Green);
-                PlayerWon = true;
+                // нарахування досвіду та нагороди
                 this.Close();
-                return;
             }
 
-            isPlayerTurn = false;
             EnemyTurn();
         }
+
+
+        private void btnAttack_Click(object sender, EventArgs e)
+        {
+            usePlayerSkill(0);
+        }
+
+        private void btnStrongAttack_Click(object sender, EventArgs e)
+        {
+            usePlayerSkill(1);
+        }
+
         private void btnHeal_Click(object sender, EventArgs e)
         {
-            if (!isPlayerTurn)
-                return;
-
-            int manaCost = 10;
-
-            if (player.Mana < manaCost)
-            {
-                AddLog("Недостатньо мани!", Color.Orange);
-                return;
-            }
-
-            player.Heal(25);
-            player.Mana -= manaCost;
-
-            AddLog($"{player.Name} лікується і відновлює HP!", Color.Green);
-
-            UpdateUI();
-
-            isPlayerTurn = false;
-            EnemyTurn();
+            usePlayerSkill(2);
         }
+
         private void btnRest_Click(object sender, EventArgs e)
         {
-            if (!isPlayerTurn)
-                return;
-
-            player.Mana += 15;
-
-            if (player.Mana > player.MaxMana)
-                player.Mana = player.MaxMana;
-
-            AddLog($"{player.Name} відпочиває і відновлює ману!", Color.Blue);
-
-            UpdateUI();
-
-            isPlayerTurn = false;
-            EnemyTurn();
+            usePlayerSkill(3);
         }
         private void EnemyTurn()
         {
-            if (enemy.Health <= 0)
-            {
-                AddLog($"Ворог {enemy.Name} переможений!", Color.Green);
-                PlayerWon = true;
-                this.Close();
-                return;
-            }
-
-            if (player.Health <= 0)
-            {
-                AddLog("Гравець переможений!", Color.Red);
-                PlayerLost = true;
-                this.Close();
-                return;
-            }
-
-            int action = rnd.Next(1, 4);
+            int action = rnd.Next(1, 2);
 
             if (action == 1)
             {
@@ -164,13 +97,14 @@ namespace Project
                 enemy.Heal(enemy.Level * 2);
                 AddLog($"{enemy.Name} відновлює HP!", Color.Blue);
             }
-            else
-            {
-                AddLog($"{enemy.Name} пропускає хід", Color.Gray);
-            }
 
-            isPlayerTurn = true;
             UpdateUI();
+
+            if (player.Health <= 0)
+            {
+                AddLog("Гравець переможений!", Color.Red);
+                this.Close();
+            }
         }
         private void UpdateUI()
         {
