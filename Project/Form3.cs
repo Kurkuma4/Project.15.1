@@ -15,6 +15,8 @@ namespace Project
 
         private Random rnd = new Random();
 
+        public bool PlayerWon;
+
         public BattleForm(Player player)
         {
             InitializeComponent();
@@ -38,13 +40,23 @@ namespace Project
             richTextBoxLog.ScrollToCaret();
         }
 
+        private void buttonBlock(bool isEnebled)
+        {
+            this.btnAttack.Enabled = isEnebled;
+            this.btnStrongAttack.Enabled = isEnebled;
+            this.btnHeal.Enabled = isEnebled;
+            this.btnRest.Enabled = isEnebled;
+        }
+
         private void usePlayerSkill(int skillIndex)
         {
+            buttonBlock(false);
             ResultUseSkill result = player.skills[skillIndex].use(enemy);
 
             if (!result.IsSuccess)
             {
                 AddLog("Недостатньо мани!", Color.Orange);
+                buttonBlock(true);
                 return;
             }
 
@@ -54,12 +66,14 @@ namespace Project
 
             if (enemy.Health <= 0)
             {
+                PlayerWon = true;
                 AddLog($"Ворог {enemy.Name} переможений!", Color.Green);
                 // нарахування досвіду та нагороди
                 this.Close();
             }
 
             EnemyTurn();
+            buttonBlock(true);
         }
 
 
@@ -102,6 +116,7 @@ namespace Project
 
             if (player.Health <= 0)
             {
+                PlayerWon = false;
                 AddLog("Гравець переможений!", Color.Red);
                 this.Close();
             }

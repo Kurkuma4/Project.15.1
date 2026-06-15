@@ -79,7 +79,7 @@ namespace Project
                 {
                     AddLog("Перемога в бою! Ви отримали нагороду!", Color.Green);
                 }
-                else if (battle.PlayerLost)
+                else
                 {
                     AddLog("Поразка в бою...", Color.Red);
                 }
