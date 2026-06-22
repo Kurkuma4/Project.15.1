@@ -15,10 +15,30 @@ namespace Project.Entities.Skills
         {
             if (!checkCost())
                 return new ResultUseSkill(false, 0, "", Color.Black);
+
+            Random random = new Random();
+
             int damage = this.plr.CalculateAttackPower();
+
+            if (random.Next(100) < 20)
+            {
+                damage *= 2;
+                enemy.TakeDamage(damage);
+
+                return new ResultUseSkill(
+                    true,
+                    damage,
+                    $"💥 КРИТИЧНИЙ УДАР!\n{plr.Name} наносить {damage} шкоди!",
+                    Color.Red);
+            }
+
             enemy.TakeDamage(damage);
 
-            return new ResultUseSkill(true, damage, $"{plr.Name} атакує і наносить {damage} шкоди!", Color.Blue);
+            return new ResultUseSkill(
+                true,
+                damage,
+                $"{plr.Name} атакує і наносить {damage} шкоди!",
+                Color.Blue);
         }
     }
 }

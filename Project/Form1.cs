@@ -9,22 +9,17 @@ namespace Project
 
         private List<string> events;
 
-        public Form1()
+        public Form1(Player player)
         {
             InitializeComponent();
 
-            player.Name = "Hero";
+            this.player = player;
             player.Level = 1;
             player.Strength = 5;
             player.Endurance = 5;
             player.Agility = 5;
             player.Intelligence = 5;
             player.Gold = 100;
-
-            player.ResetStats();
-
-            player.Health = player.MaxHealth;
-            player.Mana = player.MaxMana;
 
             events = new List<string>
             {
@@ -111,11 +106,19 @@ namespace Project
         {
             lblNameValue.Text = player.Name;
             lblLevelValue.Text = player.Level.ToString();
-            lblHealthValue.Text = player.MaxHealth.ToString();
-            lblManaValue.Text = player.MaxMana.ToString();
+            lblHealthValue.Text = $"{player.Health} / {player.MaxHealth}";
+            lblManaValue.Text = $"{player.Mana} / {player.MaxMana}";
             lblGoldValue.Text = player.Gold.ToString();
-            lblArmorValue.Text = player.Armor == null ? "Немає" : player.Armor.ToString();
-            lblWeaponValue.Text = player.Weapon == null ? "Немає" : player.Weapon.ToString();
+            if (player.Armor == null)
+                lblArmorValue.Text = "Немає";
+            else
+                lblArmorValue.Text = $"{player.Armor.Name} | Захист +{player.Armor.DefenseBonus}";
+
+            if (player.Weapon == null)
+                lblWeaponValue.Text = "Немає";
+            else
+                lblWeaponValue.Text = $"{player.Weapon.Name} | Атака +{player.Weapon.AttackBonus}";
+            lblExperienceValue.Text = $"{player.Experience} / {(player.Level + 1) * 100}";
         }
     }
 }

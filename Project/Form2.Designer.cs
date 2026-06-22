@@ -41,6 +41,7 @@
             // btnBuy
             // 
             btnBuy.BackColor = Color.FromArgb(255, 224, 192);
+            btnBuy.FlatStyle = FlatStyle.Popup;
             btnBuy.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point, 204);
             btnBuy.Location = new Point(193, 581);
             btnBuy.Name = "btnBuy";
@@ -65,6 +66,7 @@
             lblShopType.AutoSize = true;
             lblShopType.BackColor = Color.FromArgb(255, 224, 192);
             lblShopType.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            lblShopType.ForeColor = Color.Black;
             lblShopType.Location = new Point(407, 133);
             lblShopType.Name = "lblShopType";
             lblShopType.Size = new Size(120, 50);
@@ -74,6 +76,7 @@
             // btnClose
             // 
             btnClose.BackColor = Color.FromArgb(255, 224, 192);
+            btnClose.FlatStyle = FlatStyle.Popup;
             btnClose.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point, 204);
             btnClose.Location = new Point(677, 581);
             btnClose.Name = "btnClose";
@@ -130,6 +133,7 @@
             Controls.Add(listBoxItems);
             Controls.Add(btnBuy);
             Name = "Form2";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ShopForm";
             Load += Form2_Load;
             ResumeLayout(false);

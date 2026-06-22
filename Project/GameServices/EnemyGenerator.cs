@@ -23,10 +23,18 @@ namespace Project.GameServices
                 "Дракон"
             ]);
         }
-
         public override Enemy CreateOne()
         {
-            int level = rnd.Next(1, 6);
+            return CreateOne(1);
+        }
+        public Enemy CreateOne(int playerLevel)
+        {
+            Random rnd = new Random();
+
+            int minLevel = Math.Max(1, playerLevel - 1);
+            int maxLevel = playerLevel + 2;
+
+            int level = rnd.Next(minLevel, maxLevel + 1);
 
             return new Enemy
             {
@@ -36,8 +44,6 @@ namespace Project.GameServices
                 Defense = level * 2,
                 MaxHealth = level * 30,
                 Health = level * 30,
-                RewardGold = level * 20,
-                RewardXP = level * 15
             };
         }
     }

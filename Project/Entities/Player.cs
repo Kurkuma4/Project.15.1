@@ -8,6 +8,7 @@ namespace Project.Entities
     public class Player
     {
         public string Name = "";
+        public string HeroImage = "";
 
         public int Level = 0;
         public int Experience = 0;
@@ -38,12 +39,21 @@ namespace Project.Entities
             skills.Add(new Heal(this));
             skills.Add(new Rest(this));
         }
+        public void ClampStats()
+        {
+            if (Health > MaxHealth)
+                Health = MaxHealth;
 
+            if (Mana > MaxMana)
+                Mana = MaxMana;
+        }
+        /*
         public void ResetStats()
         {
             Health = MaxHealth;
             Mana = MaxMana;
         }
+        */
         public int CalculateAttackPower()
         {
             int weaponBonus = Weapon != null ? Weapon.AttackBonus : 0;

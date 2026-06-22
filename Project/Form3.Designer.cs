@@ -45,11 +45,16 @@
             btnRest = new Button();
             label11 = new Label();
             lblEnemyHP = new Label();
+            pictureEnemy = new PictureBox();
+            picturePlayer = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureEnemy).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picturePlayer).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = SystemColors.Control;
             label1.Font = new Font("Times New Roman", 14.25F, FontStyle.Italic, GraphicsUnit.Point, 204);
             label1.Location = new Point(25, 41);
             label1.Name = "label1";
@@ -59,7 +64,7 @@
             // 
             // richTextBoxLog
             // 
-            richTextBoxLog.Location = new Point(435, 1);
+            richTextBoxLog.Location = new Point(461, 1);
             richTextBoxLog.Name = "richTextBoxLog";
             richTextBoxLog.Size = new Size(196, 610);
             richTextBoxLog.TabIndex = 1;
@@ -67,6 +72,7 @@
             // 
             // btnAttack
             // 
+            btnAttack.FlatStyle = FlatStyle.Popup;
             btnAttack.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             btnAttack.Location = new Point(25, 302);
             btnAttack.Name = "btnAttack";
@@ -89,6 +95,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = SystemColors.Control;
             label3.Font = new Font("Times New Roman", 14.25F, FontStyle.Italic, GraphicsUnit.Point, 204);
             label3.Location = new Point(25, 79);
             label3.Name = "label3";
@@ -168,6 +175,7 @@
             // 
             // btnStrongAttack
             // 
+            btnStrongAttack.FlatStyle = FlatStyle.Popup;
             btnStrongAttack.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             btnStrongAttack.Location = new Point(25, 380);
             btnStrongAttack.Name = "btnStrongAttack";
@@ -179,6 +187,7 @@
             // 
             // btnHeal
             // 
+            btnHeal.FlatStyle = FlatStyle.Popup;
             btnHeal.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             btnHeal.Location = new Point(25, 458);
             btnHeal.Name = "btnHeal";
@@ -190,6 +199,7 @@
             // 
             // btnRest
             // 
+            btnRest.FlatStyle = FlatStyle.Popup;
             btnRest.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             btnRest.Location = new Point(25, 533);
             btnRest.Name = "btnRest";
@@ -219,11 +229,34 @@
             lblEnemyHP.TabIndex = 16;
             lblEnemyHP.Text = "label12";
             // 
+            // pictureEnemy
+            // 
+            pictureEnemy.Location = new Point(673, 157);
+            pictureEnemy.Name = "pictureEnemy";
+            pictureEnemy.Size = new Size(345, 443);
+            pictureEnemy.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureEnemy.TabIndex = 17;
+            pictureEnemy.TabStop = false;
+            // 
+            // picturePlayer
+            // 
+            picturePlayer.Location = new Point(194, 157);
+            picturePlayer.Name = "picturePlayer";
+            picturePlayer.Size = new Size(250, 443);
+            picturePlayer.SizeMode = PictureBoxSizeMode.StretchImage;
+            picturePlayer.TabIndex = 18;
+            picturePlayer.TabStop = false;
+            // 
             // BattleForm
             // 
+            AccessibleRole = AccessibleRole.IpAddress;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1044, 612);
+            Controls.Add(picturePlayer);
+            Controls.Add(pictureEnemy);
             Controls.Add(lblEnemyHP);
             Controls.Add(label11);
             Controls.Add(btnRest);
@@ -241,8 +274,12 @@
             Controls.Add(btnAttack);
             Controls.Add(richTextBoxLog);
             Controls.Add(label1);
+            DoubleBuffered = true;
             Name = "BattleForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "BattleForm";
+            ((System.ComponentModel.ISupportInitialize)pictureEnemy).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picturePlayer).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -266,5 +303,7 @@
         private Button btnRest;
         private Label label11;
         private Label lblEnemyHP;
+        private PictureBox pictureEnemy;
+        private PictureBox picturePlayer;
     }
 }

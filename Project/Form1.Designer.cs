@@ -45,13 +45,15 @@
             lblArmorValue = new Label();
             lblWeaponValue = new Label();
             lblWeapon = new Label();
+            lblExperienceValue = new Label();
+            lblExperience = new Label();
             SuspendLayout();
             // 
             // lblName
             // 
             lblName.AutoSize = true;
             lblName.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            lblName.Location = new Point(26, 44);
+            lblName.Location = new Point(24, 9);
             lblName.Name = "lblName";
             lblName.Size = new Size(66, 25);
             lblName.TabIndex = 0;
@@ -61,7 +63,7 @@
             // 
             lblLevel.AutoSize = true;
             lblLevel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            lblLevel.Location = new Point(26, 85);
+            lblLevel.Location = new Point(26, 48);
             lblLevel.Name = "lblLevel";
             lblLevel.Size = new Size(59, 25);
             lblLevel.TabIndex = 1;
@@ -121,7 +123,7 @@
             // 
             lblLevelValue.AutoSize = true;
             lblLevelValue.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            lblLevelValue.Location = new Point(108, 85);
+            lblLevelValue.Location = new Point(108, 48);
             lblLevelValue.Name = "lblLevelValue";
             lblLevelValue.Size = new Size(63, 25);
             lblLevelValue.TabIndex = 7;
@@ -131,7 +133,7 @@
             // 
             lblNameValue.AutoSize = true;
             lblNameValue.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            lblNameValue.Location = new Point(108, 44);
+            lblNameValue.Location = new Point(108, 9);
             lblNameValue.Name = "lblNameValue";
             lblNameValue.Size = new Size(63, 25);
             lblNameValue.TabIndex = 8;
@@ -149,13 +151,16 @@
             // 
             // NextTurn
             // 
+            NextTurn.BackColor = Color.White;
+            NextTurn.FlatStyle = FlatStyle.Popup;
             NextTurn.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             NextTurn.Location = new Point(26, 372);
             NextTurn.Name = "NextTurn";
             NextTurn.Size = new Size(145, 57);
             NextTurn.TabIndex = 10;
             NextTurn.Text = "Next Turn";
-            NextTurn.UseVisualStyleBackColor = true;
+            NextTurn.TextImageRelation = TextImageRelation.TextAboveImage;
+            NextTurn.UseVisualStyleBackColor = false;
             NextTurn.Click += btnNextTurn_Click;
             // 
             // richTextBox1
@@ -211,6 +216,26 @@
             lblWeapon.TabIndex = 15;
             lblWeapon.Text = "Weapon:";
             // 
+            // lblExperienceValue
+            // 
+            lblExperienceValue.AutoSize = true;
+            lblExperienceValue.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            lblExperienceValue.Location = new Point(125, 87);
+            lblExperienceValue.Name = "lblExperienceValue";
+            lblExperienceValue.Size = new Size(63, 25);
+            lblExperienceValue.TabIndex = 16;
+            lblExperienceValue.Text = "label1";
+            // 
+            // lblExperience
+            // 
+            lblExperience.AutoSize = true;
+            lblExperience.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            lblExperience.Location = new Point(11, 87);
+            lblExperience.Name = "lblExperience";
+            lblExperience.Size = new Size(108, 25);
+            lblExperience.TabIndex = 17;
+            lblExperience.Text = "Experience:";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -218,6 +243,8 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblExperience);
+            Controls.Add(lblExperienceValue);
             Controls.Add(lblWeapon);
             Controls.Add(lblWeaponValue);
             Controls.Add(lblArmorValue);
@@ -235,6 +262,7 @@
             Controls.Add(lblLevel);
             Controls.Add(lblName);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             ResumeLayout(false);
             PerformLayout();
@@ -258,5 +286,7 @@
         private Label lblArmorValue;
         private Label lblWeaponValue;
         private Label lblWeapon;
+        private Label lblExperienceValue;
+        private Label lblExperience;
     }
 }
