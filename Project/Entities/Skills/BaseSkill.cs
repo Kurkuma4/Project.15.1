@@ -9,8 +9,9 @@ namespace Project.Entities.Skills
         int id;
         protected string name;
         protected int cost;
+        protected int cooldown;
+        protected int currentCooldown;
         protected Player plr;
-
         public int Id { get => id; }
         public string Name { get => name; }
         public int Cost { get => cost; }
@@ -24,15 +25,11 @@ namespace Project.Entities.Skills
 
         protected bool checkCost()
         {
-            if (this.plr.Mana >= cost)
-            {
-                this.plr.Mana -= cost;
-                return true;
-            }
-
-            return false;
+            if (this.plr.Mana < cost)
+                return false;
+            this.plr.Mana -= cost;
+            return true;
         }
-
         public abstract ResultUseSkill use(Enemy enemy);
     }
 }

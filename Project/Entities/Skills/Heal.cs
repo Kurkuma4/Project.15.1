@@ -13,7 +13,7 @@ namespace Project.Entities.Skills
         public override ResultUseSkill use(Enemy enemy)
         {
             if (!checkCost())
-                return new ResultUseSkill(false, 0, "", Color.Black);
+                return new ResultUseSkill(false, 0, "Недостатньо мани!", Color.Orange);
 
             int healAmount = this.plr.Intelligence * 5;
 

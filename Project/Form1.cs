@@ -1,11 +1,19 @@
 using Project.Entities;
+using Project.Entities.Skills;
+using Project.GameServices;
+using System.Numerics;
 
 namespace Project
 {
     public partial class Form1 : Form
     {
-        Player player = new Player();
+        SaveLoadService saveService = new SaveLoadService();
+
+        private Player player;
         Random rnd = new Random();
+
+        public static int BossCooldown = 0;
+        private int lastForest = 0;
 
         private List<string> events;
 
@@ -14,12 +22,9 @@ namespace Project
             InitializeComponent();
 
             this.player = player;
-            player.Level = 1;
-            player.Strength = 5;
-            player.Endurance = 5;
-            player.Agility = 5;
-            player.Intelligence = 5;
-            player.Gold = 100;
+            ((UniqueSkill)this.player.skills[4]).LoadCooldown(this.player.UniqueSkillCooldown);
+
+            BossCooldown = this.player.SavedBossCooldown;
 
             events = new List<string>
             {
@@ -36,7 +41,25 @@ namespace Project
                 "Ви повинні кредитору золото :( -200 золота"
             };
 
+            RestoreBackground();
             UpdateUI();
+        }
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+               "Ви впевнені, що хочете зберегти гру?",
+               "Підтвердження збереження",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Question);
+
+            if (result == DialogResult.No)
+                return;
+
+            player.SavedBossCooldown = Form1.BossCooldown;
+
+            saveService.Save(player);
+
+            MessageBox.Show("Гра збережена!");
         }
         private void btnNextTurn_Click(object sender, EventArgs e)
         {
@@ -72,11 +95,27 @@ namespace Project
 
                 if (battle.PlayerWon)
                 {
-                    AddLog("Перемога в бою! Ви отримали нагороду!", Color.Green);
+                    if (battle.CurrentEnemy.IsBoss)
+                    {
+                        SetBossBackground();
+                        AddLog("👑 Ви перемогли БОСА!", Color.Gold);
+                    }
+                    else
+                    {
+                        if (BossCooldown > 0)
+                            BossCooldown--;
+
+                        SetForestBackground();
+                        AddLog("Перемога в бою! Ви отримали нагороду!", Color.Green);
+                    }
                 }
                 else
                 {
-                    AddLog("Поразка в бою...", Color.Red);
+                    DeathForm death = new DeathForm(player, battle.CurrentEnemy);
+
+                    death.Show();
+
+                    this.Close();
                 }
 
                 UpdateUI();
@@ -87,6 +126,8 @@ namespace Project
 
                 Form2 shop = new Form2(player);
                 shop.ShowDialog();
+
+                SetShopBackground();
 
                 UpdateUI();
             }
@@ -102,6 +143,7 @@ namespace Project
             richTextBox1.SelectionStart = richTextBox1.Text.Length;
             richTextBox1.ScrollToCaret();
         }
+
         private void UpdateUI()
         {
             lblNameValue.Text = player.Name;
@@ -110,15 +152,69 @@ namespace Project
             lblManaValue.Text = $"{player.Mana} / {player.MaxMana}";
             lblGoldValue.Text = player.Gold.ToString();
             if (player.Armor == null)
-                lblArmorValue.Text = "Немає";
+                lblArmorValue.Text = "None";
             else
-                lblArmorValue.Text = $"{player.Armor.Name} | Захист +{player.Armor.DefenseBonus}";
+                lblArmorValue.Text = $"{player.Armor.Name} | Defense +{player.Armor.DefenseBonus}";
 
             if (player.Weapon == null)
-                lblWeaponValue.Text = "Немає";
+                lblWeaponValue.Text = "None";
             else
-                lblWeaponValue.Text = $"{player.Weapon.Name} | Атака +{player.Weapon.AttackBonus}";
-            lblExperienceValue.Text = $"{player.Experience} / {(player.Level + 1) * 100}";
+                lblWeaponValue.Text = $"{player.Weapon.Name} | Attack +{player.Weapon.AttackBonus}";
+            lblExperienceValue.Text = $"{player.Experience} / {player.Level * 100}";
+        }
+        private void SetForestBackground()
+        {
+            int bg;
+
+            do
+            {
+                bg = rnd.Next(1, 4);
+            }
+            while (bg == lastForest);
+
+            lastForest = bg;
+
+            if (bg == 1)
+                BackgroundImage = Image.FromFile("Images/Форм1Forest1.jpg");
+            else if (bg == 2)
+                BackgroundImage = Image.FromFile("Images/Форм1Forest2.jpg");
+            else
+                BackgroundImage = Image.FromFile("Images/Форм1Forest3.jpg");
+
+            BackgroundImageLayout = ImageLayout.Stretch;
+
+            player.BackgroundState = 0;
+        }
+
+        private void SetShopBackground()
+        {
+            BackgroundImage = Image.FromFile("Images/Форм1AfterShop1.jpg");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            player.BackgroundState = 1;
+        }
+
+        private void SetBossBackground()
+        {
+            BackgroundImage = Image.FromFile("Images/Форм1AfterBattle1.jpg");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            player.BackgroundState = 2;
+        }
+        private void RestoreBackground()
+        {
+            switch (player.BackgroundState)
+            {
+                case 0:
+                    SetForestBackground();
+                    break;
+
+                case 1:
+                    SetShopBackground();
+                    break;
+
+                case 2:
+                    SetBossBackground();
+                    break;
+            }
         }
     }
 }

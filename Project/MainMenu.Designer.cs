@@ -34,6 +34,7 @@
             btnRules = new Button();
             btnExit = new Button();
             lblVersion = new Label();
+            btnLoadGame = new Button();
             SuspendLayout();
             // 
             // lblTitle
@@ -42,7 +43,7 @@
             lblTitle.BackColor = Color.Transparent;
             lblTitle.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point, 204);
             lblTitle.ForeColor = Color.White;
-            lblTitle.Location = new Point(207, 220);
+            lblTitle.Location = new Point(200, 130);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(553, 65);
             lblTitle.TabIndex = 0;
@@ -50,19 +51,19 @@
             // 
             // btnStart
             // 
-            btnStart.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            btnStart.Location = new Point(207, 516);
+            btnStart.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            btnStart.Location = new Point(215, 269);
             btnStart.Name = "btnStart";
             btnStart.Size = new Size(163, 51);
             btnStart.TabIndex = 1;
-            btnStart.Text = "Start";
+            btnStart.Text = "New Game";
             btnStart.UseVisualStyleBackColor = true;
-            btnStart.Click += btnStart_Click;
+            btnStart.Click += btnNewGame_Click;
             // 
             // btnRules
             // 
             btnRules.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            btnRules.Location = new Point(399, 516);
+            btnRules.Location = new Point(135, 384);
             btnRules.Name = "btnRules";
             btnRules.Size = new Size(163, 51);
             btnRules.TabIndex = 2;
@@ -73,7 +74,7 @@
             // btnExit
             // 
             btnExit.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            btnExit.Location = new Point(591, 516);
+            btnExit.Location = new Point(631, 384);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(163, 51);
             btnExit.TabIndex = 3;
@@ -93,6 +94,17 @@
             lblVersion.TabIndex = 4;
             lblVersion.Text = "Version 1.0";
             // 
+            // btnLoadGame
+            // 
+            btnLoadGame.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            btnLoadGame.Location = new Point(560, 269);
+            btnLoadGame.Name = "btnLoadGame";
+            btnLoadGame.Size = new Size(163, 51);
+            btnLoadGame.TabIndex = 5;
+            btnLoadGame.Text = "Load";
+            btnLoadGame.UseVisualStyleBackColor = true;
+            btnLoadGame.Click += btnLoadGame_Click;
+            // 
             // MainMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -100,6 +112,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(970, 579);
+            Controls.Add(btnLoadGame);
             Controls.Add(lblVersion);
             Controls.Add(btnExit);
             Controls.Add(btnRules);
@@ -120,5 +133,6 @@
         private Button btnRules;
         private Button btnExit;
         private Label lblVersion;
+        private Button btnLoadGame;
     }
 }

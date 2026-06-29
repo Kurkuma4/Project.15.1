@@ -1,35 +1,40 @@
 ﻿using Project.Entities.Skills;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Project.Entities
 {
     public class Player
     {
-        public string Name = "";
-        public string HeroImage = "";
+        public bool IsLoadedGame { get; set; }
+        public string Name { get; set; }
+        public string HeroImage { get; set; }
 
-        public int Level = 0;
-        public int Experience = 0;
+        public int Level { get; set; }
+        public int Experience { get; set; }
 
-        public int Strength = 0;
-        public int Endurance = 0;
-        public int Agility = 0;
-        public int Intelligence = 0;
-        public int Mana = 0;
+        public int Strength { get; set; }
+        public int Endurance { get; set; }
+        public int Agility { get; set; }
+        public int Intelligence { get; set; }
 
-        public int Gold = 0;
+        public int Gold { get; set; }
 
-        public Weapon Weapon = null;
-        public Armor Armor = null;
+        public bool HasBerserkBuff { get; set; }
+
+        public int Health { get; set; }
+        public int Mana { get; set; }
+
+        public Weapon Weapon { get; set; }
+        public Armor Armor { get; set; }
         public int MaxHealth => Endurance * 10;
-        public int Health = 0;
 
         public int MaxMana => Intelligence * 5;
 
         public List<BaseSkill> skills;
 
+        public Difficulty SavedDifficulty { get; set; }
+        public int UniqueSkillCooldown { get; set; }
+        public int SavedBossCooldown { get; set; }
+        public int BackgroundState { get; set; }
         public Player()
         {
             skills = new List<BaseSkill>();
@@ -38,6 +43,7 @@ namespace Project.Entities
             skills.Add(new PowerStrike(this));
             skills.Add(new Heal(this));
             skills.Add(new Rest(this));
+            skills.Add(new UniqueSkill(this));
         }
         public void ClampStats()
         {

@@ -6,9 +6,9 @@ namespace Project.Entities
 {
     public class Weapon
     {
-        public string Name;
-        public int Price;
-        public int AttackBonus;
+        public string Name { get; set; }
+        public int Price { get; set; }
+        public int AttackBonus { get; set; }
 
         public override string ToString()
         {

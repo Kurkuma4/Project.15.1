@@ -16,9 +16,13 @@ namespace Project.Entities
         public int Health;
         public int MaxHealth;
 
+        public bool IsBoss;
+
         public int RewardGold;
         public int RewardXP;
 
+        public int BurnTurns = 0;
+        public bool BurnStartsNextTurn = false;
         public void TakeDamage(int damage)
         {
             damage -= Defense / 2;

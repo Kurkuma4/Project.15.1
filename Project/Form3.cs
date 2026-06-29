@@ -14,17 +14,18 @@ namespace Project
         private Random rnd = new Random();
 
         public bool PlayerWon;
-
+        public Enemy CurrentEnemy
+        {
+            get { return enemy; }
+        }
         public BattleForm(Player player)
         {
             InitializeComponent();
 
             this.player = player;
 
-            if (player.Health <= 0)
-                player.Health = player.MaxHealth;
-
-            enemy = enemyGenerator.CreateOne(player.Level);
+            enemyGenerator.SetPlayer(player);
+            enemy = enemyGenerator.CreateOne();
 
             UpdateUI();
         }
@@ -41,6 +42,7 @@ namespace Project
         private void buttonBlock(bool isEnebled)
         {
             this.btnAttack.Enabled = isEnebled;
+            this.btnUniqueSkill.Enabled = isEnebled;
             this.btnStrongAttack.Enabled = isEnebled;
             this.btnHeal.Enabled = isEnebled;
             this.btnRest.Enabled = isEnebled;
@@ -53,7 +55,7 @@ namespace Project
 
             if (!result.IsSuccess)
             {
-                AddLog("Недостатньо мани!", Color.Orange);
+                AddLog(result.Desc, result.Color);
                 buttonBlock(true);
                 return;
             }
@@ -67,10 +69,36 @@ namespace Project
                 PlayerWon = true;
                 AddLog($"Ворог {enemy.Name} переможений!", Color.Green);
 
-                int goldReward = rnd.Next(10, 51);
-                int expReward = 20;
+                int goldReward = 0;
+                int expReward = 0;
+
+                if (GameSettings.GameDifficulty == Difficulty.Easy)
+                {
+                    goldReward = rnd.Next(20, 61);
+                    expReward = 25;
+                }
+                else if (GameSettings.GameDifficulty == Difficulty.Normal)
+                {
+                    goldReward = rnd.Next(10, 51);
+                    expReward = 20;
+                }
+                else if (GameSettings.GameDifficulty == Difficulty.Hard)
+                {
+                    goldReward = rnd.Next(5, 31);
+                    expReward = 10;
+                }
+
+                if (enemy.IsBoss)
+                {
+                    goldReward *= 2;
+                    expReward *= 2;
+                }
+
                 int healAfterBattle = player.MaxHealth / 10;
+                int manaAfterBattle = (player.Level + 1) * 5;
+
                 player.Health += healAfterBattle;
+                player.Mana += manaAfterBattle;
 
                 player.Gold += goldReward;
                 player.Experience += expReward;
@@ -78,31 +106,36 @@ namespace Project
                 if (player.Health > player.MaxHealth)
                     player.Health = player.MaxHealth;
 
-                MessageBox.Show(
-                $"🎉 Вітаємо! Ви отримали нагороду!\n\n" +
-                $"❤️ Відновлено {healAfterBattle} HP після бою!\n" +
-                $"💰 Отримано {goldReward} золота!" + "\n" +
-                $"✨ Отримано {expReward} XP!");
+                if (player.Mana > player.MaxMana)
+                    player.Mana = player.MaxMana;
 
-                if (player.Experience >= (player.Level + 1) * 100)
+                if (enemy.IsBoss)
                 {
-                    player.Level++;
-
-                    player.Strength += 2;
-                    player.Endurance += 1;
-                    player.Agility += 1;
-                    player.Intelligence += 1;
-
-                    player.ClampStats();
 
                     MessageBox.Show(
-                        $"🎉 Вітаємо!\n\n" +
-                        $"Досягнуто {player.Level} рівня!\n\n" +
-                        $"⚔ Сила +2\n" +
-                        $"❤️ Витривалість +1\n" +
-                        $"🏃 Спритність +1\n" +
-                        $"✨ Інтелект +1",
-                        "Новий рівень!");
+                    $"👑 Ви перемогли БОСА!\n💰 Нагорода збільшена у 2 рази!\n\n" +
+                    $"❤️ Відновлено {healAfterBattle} HP після бою!\n" +
+                    $"🌟 Відновлено {manaAfterBattle} MP після бою!\n" +
+                    $"💰 Отримано {goldReward} золота!" + "\n" +
+                    $"✨ Отримано {expReward} XP!");
+                }
+
+                else 
+                {
+                    MessageBox.Show(
+                    $"🎉 Вітаємо! Ви отримали нагороду!\n\n" +
+                    $"❤️ Відновлено {healAfterBattle} HP після бою!\n" +
+                    $"🌟 Відновлено {manaAfterBattle} MP після бою!\n" +
+                    $"💰 Отримано {goldReward} золота!" + "\n" +
+                    $"✨ Отримано {expReward} XP!");
+                }
+
+                if (player.Experience >= player.Level * 100)
+                {
+                    player.Experience = 0;
+                    player.Level++;
+
+                    ApplyLevelUp();
                 }
                 this.Close();
             }
@@ -133,9 +166,38 @@ namespace Project
             usePlayerSkill(3);
             player.ClampStats();
         }
+        private void btnUniqueSkill_Click(object sender, EventArgs e)
+        {
+            usePlayerSkill(4);
+        }
         private void EnemyTurn()
         {
-            int action = rnd.Next(1, 3);
+            int action;
+
+            if (enemy.BurnStartsNextTurn)
+            {
+                enemy.BurnStartsNextTurn = false;
+            }
+            else if (enemy.BurnTurns > 0)
+            {
+                int burnDamage = enemy.MaxHealth / 10;
+
+                enemy.Health -= burnDamage;
+                if (enemy.Health < 0)
+                    enemy.Health = 0;
+                enemy.BurnTurns--;
+
+                AddLog($"🔥 Ворог горить, вогонь наносить {burnDamage} шкоди!", Color.Red);
+            }
+
+            if (GameSettings.GameDifficulty == Difficulty.Hard)
+            {
+                action = rnd.Next(1, 3);
+            }
+            else
+            {
+                action = 1;
+            }
 
             if (action == 1)
             {
@@ -149,14 +211,84 @@ namespace Project
                 AddLog($"{enemy.Name} відновлює HP!", Color.Blue);
             }
 
+            ((UniqueSkill)player.skills[4]).TickCooldown();
+
             UpdateUI();
 
             if (player.Health <= 0)
             {
                 PlayerWon = false;
-                AddLog("Гравець переможений!", Color.Red);
+
                 this.Close();
             }
+        }
+        private void ApplyLevelUp()
+        {
+            if (player.Level % 10 == 0)
+            {
+                player.Strength += 5;
+                player.Endurance += 5;
+                player.Agility += 5;
+                player.Intelligence += 5;
+
+                MessageBox.Show(
+                $"🎉 ЮВІЛЕЙНИЙ РІВЕНЬ!\n\n" +
+                $"Досягнуто {player.Level} рівня!\n\n" +
+                $"⚔ Сила +5\n" +
+                $"❤️ Витривалість +5\n" +
+                $"🏃 Спритність +5\n" +
+                $"✨ Інтелект +5");
+            }
+            else
+            {
+                if (player.Name == "Barbarian")
+                {
+                    player.Strength += 4;
+                    player.Endurance += 2;
+                    player.Agility += 1;
+                    player.Intelligence += 1;
+                    MessageBox.Show(
+                    $"🎉 Вітаємо!\n\n" +
+                    $"Досягнуто {player.Level} рівня!\n\n" +
+                    $"⚔ Сила +4\n" +
+                    $"❤️ Витривалість +2\n" +
+                    $"🏃 Спритність +1\n" +
+                    $"✨ Інтелект +1",
+                    "Новий рівень!");
+                }
+                else if (player.Name == "Elf")
+                {
+                    player.Strength += 2;
+                    player.Endurance += 2;
+                    player.Agility += 3;
+                    player.Intelligence += 1;
+                    MessageBox.Show(
+                    $"🎉 Вітаємо!\n\n" +
+                    $"Досягнуто {player.Level} рівня!\n\n" +
+                    $"⚔ Сила +2\n" +
+                    $"❤️ Витривалість +2\n" +
+                    $"🏃 Спритність +3\n" +
+                    $"✨ Інтелект +1",
+                    "Новий рівень!");
+                }
+                else if (player.Name == "Mage")
+                {
+                    player.Strength += 1;
+                    player.Endurance += 2;
+                    player.Agility += 1;
+                    player.Intelligence += 4;
+                    MessageBox.Show(
+                    $"🎉 Вітаємо!\n\n" +
+                    $"Досягнуто {player.Level} рівня!\n\n" +
+                    $"⚔ Сила +1\n" +
+                    $"❤️ Витривалість +2\n" +
+                    $"🏃 Спритність +1\n" +
+                    $"✨ Інтелект +4",
+                    "Новий рівень!");
+                }
+            }
+
+            player.ClampStats();
         }
         private void UpdateUI()
         {
@@ -167,9 +299,9 @@ namespace Project
             lblEnemyName.Text = enemy.Name;
             lblEnemyLevel.Text = $" {enemy.Level}";
             lblEnemyHP.Text = $" {enemy.Health}/{enemy.MaxHealth}";
-            pictureEnemy.Image = Image.FromFile($"Images/{enemy.Name}.jpg");
-            picturePlayer.Image = Image.FromFile($"Images/{player.HeroImage}.jpg");
-            this.BackgroundImage = Image.FromFile($"Images/Фон{enemy.Name}.jpg");
+            pictureEnemy.Image = System.Drawing.Image.FromFile($"Images/{enemy.Name}.png");
+            picturePlayer.Image = System.Drawing.Image.FromFile($"Images/{player.HeroImage}.png");
+            this.BackgroundImage = System.Drawing.Image.FromFile($"Images/Фон{enemy.Name}.png");
         }
     }
 }

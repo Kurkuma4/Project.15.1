@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             lblName = new Label();
             lblLevel = new Label();
             lblHealth = new Label();
@@ -47,6 +46,7 @@
             lblWeapon = new Label();
             lblExperienceValue = new Label();
             lblExperience = new Label();
+            btnSave = new Button();
             SuspendLayout();
             // 
             // lblName
@@ -154,7 +154,7 @@
             NextTurn.BackColor = Color.White;
             NextTurn.FlatStyle = FlatStyle.Popup;
             NextTurn.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            NextTurn.Location = new Point(26, 372);
+            NextTurn.Location = new Point(24, 385);
             NextTurn.Name = "NextTurn";
             NextTurn.Size = new Size(145, 57);
             NextTurn.TabIndex = 10;
@@ -168,11 +168,11 @@
             richTextBox1.BackColor = Color.BurlyWood;
             richTextBox1.Font = new Font("SimSun-ExtB", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             richTextBox1.ForeColor = Color.Black;
-            richTextBox1.Location = new Point(375, 23);
+            richTextBox1.Location = new Point(399, 12);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;
             richTextBox1.ScrollBars = RichTextBoxScrollBars.Vertical;
-            richTextBox1.Size = new Size(396, 406);
+            richTextBox1.Size = new Size(380, 417);
             richTextBox1.TabIndex = 11;
             richTextBox1.Text = "";
             // 
@@ -236,13 +236,27 @@
             lblExperience.TabIndex = 17;
             lblExperience.Text = "Experience:";
             // 
+            // btnSave
+            // 
+            btnSave.BackColor = Color.White;
+            btnSave.FlatStyle = FlatStyle.Popup;
+            btnSave.Font = new Font("Segoe UI Symbol", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnSave.Location = new Point(24, 322);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(145, 57);
+            btnSave.TabIndex = 18;
+            btnSave.Text = "Save Game";
+            btnSave.TextImageRelation = TextImageRelation.TextAboveImage;
+            btnSave.UseVisualStyleBackColor = false;
+            btnSave.Click += btnSave_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnSave);
             Controls.Add(lblExperience);
             Controls.Add(lblExperienceValue);
             Controls.Add(lblWeapon);
@@ -288,5 +302,6 @@
         private Label lblWeapon;
         private Label lblExperienceValue;
         private Label lblExperience;
+        private Button btnSave;
     }
 }

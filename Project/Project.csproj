@@ -9,97 +9,172 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\Бандит.jpg" />
-    <None Remove="Images\Відьма.jpg" />
-    <None Remove="Images\Вовк.jpg" />
-    <None Remove="Images\Дракон.jpg" />
-    <None Remove="Images\Зомбі.jpg" />
-    <None Remove="Images\Орк.jpg" />
-    <None Remove="Images\Павук.jpg" />
-    <None Remove="Images\Скелет.jpg" />
-    <None Remove="Images\Троль.jpg" />
-    <None Remove="Images\ФонБандит.jpg" />
-    <None Remove="Images\ФонВідьма.jpg" />
-    <None Remove="Images\ФонВовк.jpg" />
-    <None Remove="Images\ФонГоблін.jpg" />
-    <None Remove="Images\ФонДракон.jpg" />
-    <None Remove="Images\ФонЗомбі.jpg" />
-    <None Remove="Images\ФонОрк.jpg" />
-    <None Remove="Images\ФонПавук.jpg" />
-    <None Remove="Images\ФонСкелет.jpg" />
-    <None Remove="Images\ФонТроль.jpg" />
+    <None Remove="Images\ClassArcher.jpg" />
+    <None Remove="Images\ClassMage.jpg" />
+    <None Remove="Images\ClassTank.jpg" />
+    <None Remove="Images\Бандит.png" />
+    <None Remove="Images\Відьма.png" />
+    <None Remove="Images\Вовк.png" />
+    <None Remove="Images\Гоблін.png" />
+    <None Remove="Images\Демон.png" />
+    <None Remove="Images\Дракон.png" />
+    <None Remove="Images\Древній Дракон.png" />
+    <None Remove="Images\Зомбі.png" />
+    <None Remove="Images\Король Орків.png" />
+    <None Remove="Images\Король Скелетів.png" />
+    <None Remove="Images\Орк.png" />
+    <None Remove="Images\Павук.png" />
+    <None Remove="Images\Скелет.png" />
+    <None Remove="Images\Темний лорд.png" />
+    <None Remove="Images\Троль.png" />
+    <None Remove="Images\ФонБандит.png" />
+    <None Remove="Images\ФонВідьма.png" />
+    <None Remove="Images\ФонВовк.png" />
+    <None Remove="Images\ФонГоблін.png" />
+    <None Remove="Images\ФонДемон.png" />
+    <None Remove="Images\ФонДракон.png" />
+    <None Remove="Images\ФонДревній Дракон.png" />
+    <None Remove="Images\ФонЗомбі.png" />
+    <None Remove="Images\ФонКороль Орків.png" />
+    <None Remove="Images\ФонКороль Скелетів.png" />
+    <None Remove="Images\ФонОрк.png" />
+    <None Remove="Images\ФонПавук.png" />
+    <None Remove="Images\ФонСкелет.png" />
+    <None Remove="Images\ФонТемний Лорд.png" />
+    <None Remove="Images\ФонТроль.png" />
+    <None Remove="Images\Форм1Forest1.jpg" />
+    <None Remove="Images\Форм1Forest2.jpg" />
+    <None Remove="Images\Форм1Forest3.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\Barbarian.jpg">
+    <Content Include="Images\Barbarian.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Гоблін.jpg">
+    <Content Include="Images\ClassArcher.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Бандит.jpg">
+    <Content Include="Images\ClassMage.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Відьма.jpg">
+    <Content Include="Images\ClassTank.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Вовк.jpg">
+    <Content Include="Images\Elf.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Дракон.jpg">
+    <Content Include="Images\Mage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Elf.jpg">
+    <Content Include="Images\Бандит.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Зомбі.jpg">
+    <Content Include="Images\Відьма.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Mage.jpg">
+    <Content Include="Images\Вовк.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Орк.jpg">
+    <Content Include="Images\Гоблін.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Павук.jpg">
+    <Content Include="Images\Демон.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Скелет.jpg">
+    <Content Include="Images\Дракон.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Троль.jpg">
+    <Content Include="Images\Древній Дракон.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\ФонБандит.jpg">
+    <Content Include="Images\Зомбі.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\ФонВідьма.jpg">
+    <Content Include="Images\Король Орків.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\ФонВовк.jpg">
+    <Content Include="Images\Король Скелетів.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\ФонГоблін.jpg">
+    <Content Include="Images\Орк.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\ФонДракон.jpg">
+    <Content Include="Images\Павук.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\ФонЗомбі.jpg">
+    <Content Include="Images\Скелет.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\ФонОрк.jpg">
+    <Content Include="Images\Темний лорд.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\ФонПавук.jpg">
+    <Content Include="Images\Троль.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\ФонСкелет.jpg">
+    <Content Include="Images\ФонБандит.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\ФонТроль.jpg">
+    <Content Include="Images\ФонВідьма.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\ФонВовк.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонГоблін.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонДемон.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонДракон.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонДревній Дракон.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонЗомбі.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонКороль Орків.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонКороль Скелетів.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонОрк.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонПавук.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонСкелет.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонТемний Лорд.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ФонТроль.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Форм1AfterBattle1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Форм1AfterShop1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Форм1Forest1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Форм1Forest2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Форм1Forest3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Text.Json" Version="10.0.9" />
   </ItemGroup>
 
   <ItemGroup>
@@ -115,6 +190,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Saves\" />
   </ItemGroup>
 
 </Project>

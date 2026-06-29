@@ -14,11 +14,17 @@ namespace Project.Entities.Skills
         public override ResultUseSkill use(Enemy enemy)
         {
             if (!checkCost())
-                return new ResultUseSkill(false, 0, "", Color.Black);
+                return new ResultUseSkill(false, 0, "Недостатньо мани!", Color.Orange);
 
             Random random = new Random();
 
             int damage = this.plr.CalculateAttackPower();
+
+            if (plr.HasBerserkBuff)
+            {
+                damage = (int)(damage * 1.2);
+                plr.HasBerserkBuff = false;
+            }
 
             if (random.Next(100) < 20)
             {

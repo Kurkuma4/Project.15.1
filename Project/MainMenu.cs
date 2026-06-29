@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Project.Entities;
+using Project.GameServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Numerics;
 using System.Text;
 using System.Windows.Forms;
 
@@ -10,15 +13,16 @@ namespace Project
 {
     public partial class MainMenu : Form
     {
+        SaveLoadService saveService = new SaveLoadService();
         public MainMenu()
         {
             InitializeComponent();
         }
-        private void btnStart_Click(object sender, EventArgs e)
+        private void btnNewGame_Click(object sender, EventArgs e)
         {
-            HeroSelectForm heroForm = new HeroSelectForm();
+            DifficultySelectForm form = new DifficultySelectForm();
 
-            heroForm.Show();
+            form.Show();
 
             this.Hide();
         }
@@ -33,6 +37,28 @@ namespace Project
                 "Правила гри",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+        }
+        private void btnLoadGame_Click(object sender, EventArgs e)
+        {
+            if (!saveService.HasSave())
+            {
+                MessageBox.Show("У вас немає збережених ігор!", "Save", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Player player = saveService.Load();
+            player.IsLoadedGame = true;
+
+            if (player == null)
+            {
+                MessageBox.Show("Помилка завантаження!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Form1 game = new Form1(player);
+            game.Show();
+
+            this.Hide();
         }
     }
 }

@@ -4,6 +4,12 @@ namespace Project.GameServices
 {
     public class WeaponGenerator : BaseGenerator<Weapon>
     {
+        private Player player;
+
+        public void SetPlayer(Player player)
+        {
+            this.player = player;
+        }
         public WeaponGenerator()
         {
             this.names.AddRange([
@@ -19,10 +25,18 @@ namespace Project.GameServices
                 "Шабля"
             ]);
         }
-
-        public override Weapon CreateOne()
+            public override Weapon CreateOne()
         {
-            int attack = rnd.Next(1, 11);
+            int minAttack = 1;
+            int maxAttack = 10;
+
+            if (player != null)
+            {
+                minAttack = Math.Max(1, player.Level - 2);
+                maxAttack = player.Level + 3;
+            }
+
+            int attack = rnd.Next(minAttack, maxAttack + 1);
 
             return new Weapon
             {

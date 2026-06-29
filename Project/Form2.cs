@@ -18,6 +18,9 @@ namespace Project
 
             this.player = player;
 
+            weaponGenerator.SetPlayer(player);
+            armorGenerator.SetPlayer(player);
+
             GenerateShop();
 
             UpdateUI();
